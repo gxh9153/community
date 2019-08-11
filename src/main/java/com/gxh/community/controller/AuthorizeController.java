@@ -53,8 +53,11 @@ public class AuthorizeController {
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setAccountId(String.valueOf(gitHubUser.getId()));
+            user.setBio(gitHubUser.getBio());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setBio(gitHubUser.getBio());
+            user.setAvatarUrl(gitHubUser.getAvatarUrl());
             userMapper.insertUser(user);
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
