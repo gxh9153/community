@@ -21,3 +21,6 @@ body{
 #pagination{
     float: right;
 }
+.section{
+    margin-top: 15px;
+}

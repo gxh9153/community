@@ -25,4 +25,11 @@ public interface QuestionMapper {
     //查询中记录数
     @Select("select count(1) from question")
     public Integer count();
+
+    //通过userId查询问题
+    @Select("select * from question where creator = #{userId} limit #{offset},#{size}")
+    List<Question> listByUserId(@Param("userId") int userId, @Param("offset") Integer offset, @Param("size") Integer size);
+
+    @Select("select count(1) from question where creator = #{userid}")
+    Integer countByUserId(int userid);
 }
