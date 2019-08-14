@@ -28,8 +28,11 @@ public interface QuestionMapper {
 
     //通过userId查询问题
     @Select("select * from question where creator = #{userId} limit #{offset},#{size}")
-    List<Question> listByUserId(@Param("userId") int userId, @Param("offset") Integer offset, @Param("size") Integer size);
+    List<Question> listByUserId(@Param("userId") Integer userId, @Param("offset") Integer offset, @Param("size") Integer size);
 
-    @Select("select count(1) from question where creator = #{userid}")
-    Integer countByUserId(int userid);
+    @Select("select count(1) from question where creator = #{userId}")
+    Integer countByUserId(int userId);
+
+    @Select("select * from question where id = #{id}")
+    Question getQuestionById(Integer id);
 }

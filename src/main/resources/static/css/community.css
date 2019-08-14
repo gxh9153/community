@@ -16,11 +16,15 @@ body{
 .text-desc{
     font-size: 12px;
     font-weight: normal;
-    color: #999;
+    color:#999;
 }
 #pagination{
     float: right;
 }
 .section{
     margin-top: 15px;
+}
+.community-menu{
+    font-size: 13px;
+    color:#999;
 }
