@@ -4,6 +4,7 @@ import com.gxh.community.dto.PaginationDTO;
 import com.gxh.community.dto.QuestionDTO;
 import com.gxh.community.exception.CustomizeErrorCode;
 import com.gxh.community.exception.CustomizeException;
+import com.gxh.community.mapper.QuestionExtMapper;
 import com.gxh.community.mapper.QuestionMapper;
 import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.Question;
@@ -23,6 +24,8 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -126,5 +129,12 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+    //增加阅读数问题
+    public void incView(Integer id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
