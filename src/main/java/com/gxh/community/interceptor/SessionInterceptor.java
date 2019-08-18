@@ -4,7 +4,7 @@ import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.User;
 import com.gxh.community.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Component
+@Service
 public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
     private UserMapper userMapper;

@@ -61,8 +61,6 @@ public class PublishController {
             model.addAttribute("error","标签不能为空");
             return "publish";
         }
-
-        System.out.println(title);
         User user = (User) request.getSession().getAttribute("user");
         if(user == null){
             model.addAttribute("error","用户未登录");

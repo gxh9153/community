@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CommentDTO {
     private Integer parentId;
-    private String context;
+    private String content;
     private Integer type;
 }
