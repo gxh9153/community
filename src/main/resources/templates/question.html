@@ -15,6 +15,7 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <!--问题描述-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4><span th:text="${questionDTO.title}"></span></h4>
                 <hr>
@@ -32,7 +33,32 @@
                     编辑
                 </a>
             </div>
-            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list_hr">
+            <!--回复列表-->
+            <h5>
+                <span th:text="${questionDTO.commentCount}" class="comment_count"></span> 个回复数
+            </h5>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment_sp list_hr ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="comment : ${comments}">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-circle"
+                                 th:src="${comment.user.avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <span th:text="${comment.user.name}"></span>
+                        <div th:text="${comment.content}"></div>
+                        <div class="menu">
+                            <span class="glyphicon glyphicon-thumbs-up icon" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-comment icon" aria-hidden="true"></span>
+                            <span class="pull-right" th:text="${#dates.format(questionDTO.gmtCreate,'yyyy MM dd')}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--回复输入框-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
                 <div class="media">
                     <div class="media-left">

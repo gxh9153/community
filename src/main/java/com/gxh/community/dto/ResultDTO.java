@@ -3,7 +3,6 @@ package com.gxh.community.dto;
 import com.gxh.community.exception.CustomizeErrorCode;
 import com.gxh.community.exception.CustomizeException;
 import lombok.Data;
-import org.springframework.web.servlet.ModelAndView;
 
 @Data
 public class ResultDTO {

@@ -24,7 +24,7 @@ public class PublishController {
     QuestionService questionService;
     //编辑功能
     @GetMapping("/publish/{id}")
-    public String eidt(@PathVariable("id") Integer id,
+    public String eidt(@PathVariable("id") Long id,
                         Model model){
         QuestionDTO question = questionService.getQuestionById(id);
         model.addAttribute("title",question.getTitle());
@@ -41,7 +41,7 @@ public class PublishController {
     public String doPublish(@RequestParam("title") String title,
                             @RequestParam("description") String description,
                             @RequestParam("tag") String tag,
-                            @RequestParam("id") Integer id,
+                            @RequestParam("id") Long id,
                             HttpServletRequest request,
                             Model model){
 

@@ -52,7 +52,7 @@ public class AuthorizeController {
             user.setName(gitHubUser.getName());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setAccountId(Integer.valueOf(gitHubUser.getId()));
+            user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setBio(gitHubUser.getBio());
             user.setAvatarUrl(gitHubUser.getAvatarUrl());
             userService.createOrUpdate(user);

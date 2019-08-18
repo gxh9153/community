@@ -41,3 +41,24 @@ body{
 .media-body{
     padding-top: 10px;
 }
+.comment_sp{
+    margin: 0;
+}
+.list_hr{
+    margin-left: 15px;
+}
+.comment_count{
+    margin-left: 15px;
+}
+.menu .icon{
+    margin-left: 6px;
+    cursor: pointer;
+}
+.menu{
+    font-size: 16px;
+    color: #999;
+    margin-top: 7px;
+}
+.menu .icon:hover{
+    color: #499ef3;
+}
