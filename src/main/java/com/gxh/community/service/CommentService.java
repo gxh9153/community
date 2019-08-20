@@ -4,10 +4,7 @@ import com.gxh.community.dto.CommentDTO;
 import com.gxh.community.enums.CommentTypeEnum;
 import com.gxh.community.exception.CustomizeErrorCode;
 import com.gxh.community.exception.CustomizeException;
-import com.gxh.community.mapper.CommentMapper;
-import com.gxh.community.mapper.QuestionExtMapper;
-import com.gxh.community.mapper.QuestionMapper;
-import com.gxh.community.mapper.UserMapper;
+import com.gxh.community.mapper.*;
 import com.gxh.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,8 @@ public class CommentService {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionExtMapper questionExtMapper;
+    @Autowired
+    private CommentExtMapper commentExtMapper;
 
     @Transactional
     public void insert(Comment comment) {
@@ -46,7 +45,11 @@ public class CommentService {
             if(dbComment == null){
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
             commentMapper.insert(comment);
+            commentExtMapper.incComment(parentComment);
         }else{
             //回复问题
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -59,11 +62,12 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum typeEnum) {
         CommentExample example = new CommentExample();
         example.createCriteria()
                 .andParentIdEqualTo(id)
-                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+                .andTypeEqualTo(typeEnum.getType());
+        example.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(example);
 
         //如果comments为空，则返回一个空list
@@ -73,7 +77,7 @@ public class CommentService {
 
         //获取去掉重复的评论人
         Set<Long> commentators = comments.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
-        ArrayList<Long> userIds = new ArrayList<>();
+        List<Long> userIds = new ArrayList<>();
         userIds.addAll(commentators);
 
         //获取评论人，并转换为map
@@ -83,12 +87,12 @@ public class CommentService {
         Map<Long, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
 
         //转换comment 为commentDTO
-        comments.stream().map(comment -> {
+        List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();
-            BeanUtils.copyProperties(comment,commentDTO);
+            BeanUtils.copyProperties(comment, commentDTO);
             commentDTO.setUser(userMap.get(comment.getCommentator()));
             return commentDTO;
         }).collect(Collectors.toList());
-        return null;
+        return commentDTOS;
     }
 }

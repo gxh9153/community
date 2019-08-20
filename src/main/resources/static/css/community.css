@@ -11,7 +11,11 @@ body{
 }
 .btn-comment{
     float: right;
-    margin: 10px 0px;
+    margin: 10px 0;
+}
+#btn-twice-comment{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .media-object{
     width: 38px;
@@ -44,12 +48,6 @@ body{
 .comment_sp{
     margin: 0;
 }
-.list_hr{
-    margin-left: 15px;
-}
-.comment_count{
-    margin-left: 15px;
-}
 .menu .icon{
     margin-left: 6px;
     cursor: pointer;
@@ -60,5 +58,22 @@ body{
     margin-top: 7px;
 }
 .menu .icon:hover{
+    color: #499ef3;
+}
+.comments{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+.twice_comment{
+    margin-top: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.question_title{
+    margin-top: 25px;
+}
+.menu .active{
     color: #499ef3;
 }
