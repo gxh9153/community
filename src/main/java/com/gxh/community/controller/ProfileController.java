@@ -3,6 +3,7 @@ package com.gxh.community.controller;
 import com.gxh.community.dto.PaginationDTO;
 import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.User;
+import com.gxh.community.service.NotificationService;
 import com.gxh.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 public class ProfileController {
 
     @Autowired
-    UserMapper userMapper;
-    @Autowired
     private QuestionService questionService;
+    @Autowired
+    private NotificationService notificationService;
 
     @RequestMapping("/profile/{action}")
     public String profile(@PathVariable("action") String action,
@@ -34,13 +35,17 @@ public class ProfileController {
         if("questions".equals(action)){
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的提问");
+            PaginationDTO paginationDTO = questionService.list(user.getId(), page,size);
+            model.addAttribute("pagination",paginationDTO);
         }
         if("replies".equals(action)){
+            Long unreadCount = notificationService.unreadCount(user.getId());
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","最新回复");
+            PaginationDTO paginationDTO = notificationService.list(user.getId(),page,size);
+            model.addAttribute("pagination",paginationDTO);
+            model.addAttribute("unreadCount",unreadCount);
         }
-        PaginationDTO paginationDTO = questionService.list(user.getId(), page,size);
-        model.addAttribute("pagination",paginationDTO);
         return "profile";
     }
 }
