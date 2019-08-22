@@ -60,6 +60,9 @@ body{
 .menu .icon:hover{
     color: #499ef3;
 }
+#comment_section{
+    margin-top: 10px;
+}
 .comments{
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
@@ -74,6 +77,43 @@ body{
 .question_title{
     margin-top: 25px;
 }
+.question_tag{
+    margin-left: 5px;
+}
 .menu .active{
     color: #499ef3;
+}
+.comment_count{
+    margin-top: 17px;
+}
+.relation_li{
+    margin-top: 10px;
+    padding-left: 0px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    list-style-type: none;
+    font-size: 18px;
+}
+.relation_li :hover{
+    color: darkblue;
+}
+.wechat_img{
+    width: 180px;
+    height: 250px;
+}
+.tag_list{
+    display: none;
+    margin-top: 10px;
+}
+.label-info{
+    margin-right: 10px;
+    white-space: normal;
+    margin: 5px 5px;
+    display: inline-block;
+}
+.tagcontent{
+    padding-top: 10px;
+}
+.badge{
+    color: red;
 }

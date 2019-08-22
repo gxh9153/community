@@ -68,7 +68,7 @@ $(document).on("click", ".comment_icon", function () {
             this.setAttribute("data-collapse", "in");
             this.classList.add("active");
         } else {
-            $.getJSON("/comment/" + id, function (data) {
+            $.getJSON("/comment/" + id, function (data) { //发送get格式的ajax请求
                 $.each(data.data.reverse(), function (index, comment) {
                     var mediaLeftElement = $("<div/>", {
                         "class": "media-left"
@@ -101,12 +101,36 @@ $(document).on("click", ".comment_icon", function () {
 
                     subCommentContainer.prepend(commentElement);
                 });
-                //展开二级评论
-                comments.addClass("in");
-                // 标记二级评论展开状态
-                this.setAttribute("data-collapse", "in");
-                this.classList.add("active");
+
             });
+            //展开二级评论
+            comments.addClass("in");
+            // 标记二级评论展开状态
+            this.setAttribute("data-collapse", "in");
+            this.classList.add("active");
+        }
+    }
+});
+/*
+function selectTag(value){
+    var previous = $(".input_tag").val();
+    if(previous){
+        $(".input_tag").val(previous + ',' +value);
+    }else{
+        $(".input_tag").val(value);
+    }
+}*/
+$(document).on("click",".input_tag",function(){
+    $(".tag_list").show();
+})
+
+$(document).on("click",".question_tags",function(){
+    var previous = $(".input_tag").val();
+    if (previous.indexOf(this.innerHTML) == -1) {
+        if (previous) {
+            $(".input_tag").val(previous + ',' + this.innerHTML);
+        } else {
+            $(".input_tag").val(this.innerHTML);
         }
     }
 });

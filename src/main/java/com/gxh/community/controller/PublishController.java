@@ -1,11 +1,13 @@
 package com.gxh.community.controller;
 
+import com.gxh.community.cache.TagCache;
 import com.gxh.community.dto.QuestionDTO;
 import com.gxh.community.mapper.QuestionMapper;
 import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.Question;
 import com.gxh.community.model.User;
 import com.gxh.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +33,12 @@ public class PublishController {
         model.addAttribute("description",question.getDescription());
         model.addAttribute("tag",question.getTag());
         model.addAttribute("id",question.getId());
+        model.addAttribute("tags", TagCache.getTag());
         return "publish";
     }
     @GetMapping("/publish")
-    public String publish(){
+    public String publish(Model model){
+        model.addAttribute("tags", TagCache.getTag());
         return "publish";
     }
     @PostMapping("/publish")
@@ -48,7 +52,7 @@ public class PublishController {
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
-
+        model.addAttribute("tags", TagCache.getTag());
         if (title == null || title == "") {
             model.addAttribute("error","标题不能为空");
             return "publish";
@@ -59,6 +63,11 @@ public class PublishController {
         }
         if (tag == null || tag == "") {
             model.addAttribute("error","标签不能为空");
+            return "publish";
+        }
+        String invalid = TagCache.filterInVaild(tag);
+        if(StringUtils.isNotBlank(invalid)){
+            model.addAttribute("error","输入非法标签"+invalid);
             return "publish";
         }
         User user = (User) request.getSession().getAttribute("user");
