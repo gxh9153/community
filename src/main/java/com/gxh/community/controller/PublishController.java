@@ -66,8 +66,8 @@ public class PublishController {
             return "publish";
         }
         String invalid = TagCache.filterInVaild(tag);
-        if(StringUtils.isNotBlank(invalid)){
-            model.addAttribute("error","输入非法标签"+invalid);
+        if (StringUtils.isNotBlank(invalid)) {
+            model.addAttribute("error", "输入非法标签:" + invalid);
             return "publish";
         }
         User user = (User) request.getSession().getAttribute("user");

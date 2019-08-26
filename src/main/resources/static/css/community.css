@@ -117,3 +117,6 @@ body{
 .badge{
     color: red;
 }
+#test-editor{
+    margin-top: 10px;
+}

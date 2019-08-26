@@ -39,10 +39,11 @@ public class TagCache {
         return tagDTOS;
     }
     public static String  filterInVaild(String tags){
-        String[] splitTag = StringUtils.split(tags, ",");
-        List<TagDTO> tagDTOS = TagCache.getTag();
-        List<String> tagLists = tagDTOS.stream().flatMap(tag -> tag.getTags().stream()).collect(Collectors.toList());
-        String invaild = Arrays.stream(splitTag).filter(t -> !tagLists.contains(t)).collect(Collectors.joining(","));
-        return invaild;
+        String[] split = StringUtils.split(tags, ",");
+        List<TagDTO> tagDTOS = getTag();
+
+        List<String> tagList = tagDTOS.stream().flatMap(tag -> tag.getTags().stream()).collect(Collectors.toList());
+        String invalid = Arrays.stream(split).filter(t -> StringUtils.isBlank(t) || !tagList.contains(t)).collect(Collectors.joining(","));
+        return invalid;
     }
 }

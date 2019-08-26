@@ -72,6 +72,7 @@ public class CommentService {
             questionExtMapper.incComment(dbQuestion);
             //创建通知
             Notification notification = getNotify(comment, dbQuestion.getCreator(), commentator.getName(), dbQuestion.getTitle(), NotificationEnum.REPLY_QUESTION, dbQuestion.getId());
+            notificationMapper.insert(notification);
         }
     }
 

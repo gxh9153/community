@@ -7,7 +7,6 @@ import com.gxh.community.enums.NotificationStatusEnum;
 import com.gxh.community.exception.CustomizeErrorCode;
 import com.gxh.community.exception.CustomizeException;
 import com.gxh.community.mapper.NotificationMapper;
-import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.Notification;
 import com.gxh.community.model.NotificationExample;
 
@@ -25,9 +24,6 @@ public class NotificationService {
 
     @Autowired
     private NotificationMapper notificationMapper;
-    @Autowired
-    private UserMapper userMapper;
-
     public PaginationDTO<NotificationDTO> list(Long userId, Integer page, Integer size) {
         PaginationDTO<NotificationDTO> paginationDTO = new PaginationDTO();
         Integer totalPage;
