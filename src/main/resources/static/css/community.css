@@ -99,7 +99,7 @@ body{
 }
 .wechat_img{
     width: 180px;
-    height: 250px;
+    height: 200px;
 }
 .tag_list{
     display: none;
@@ -119,4 +119,13 @@ body{
 }
 #test-editor{
     margin-top: 10px;
+}
+#index-wechat{
+    text-align: center;
+}
+.footer{
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    padding: 0 0 15px 0;
 }
