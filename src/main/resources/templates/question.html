@@ -98,11 +98,11 @@
                         <div class="media-left">
                             <a href="#">
                                 <img class="media-object img-circle"
-                                     th:src="${questionDTO.user.avatarUrl}">
+                                     th:src="${session.user!= null?session.user.avatarUrl:'/images/default-avatar.png'}">
                             </a>
                         </div>
                         <div class="media-body">
-                            <span th:text="${questionDTO.user.name}"></span>
+                            <span th:text="${session.user!= null?session.user.name:'匿名用户'}"></span>
                         </div>
                     </div>
                     <!--<input type="hidden" id="question_id" value="123">-->
