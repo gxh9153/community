@@ -7,6 +7,7 @@ import com.gxh.community.mapper.UserMapper;
 import com.gxh.community.model.User;
 import com.gxh.community.provider.GitHubProvider;
 import com.gxh.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
     @Autowired
     UserService userService;
@@ -59,6 +61,9 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else{
+            //打印日志
+            log.error("callback get github error,{}",gitHubUser);
+            //登陆失败
             return "redirect:/";
         }
     }
