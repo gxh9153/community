@@ -66,6 +66,7 @@ public class CommentService {
             if(dbQuestion == null){
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
+            comment.setCommentCount(0);
             commentMapper.insert(comment);
             dbQuestion.setCommentCount(1);
             questionExtMapper.incComment(dbQuestion);
