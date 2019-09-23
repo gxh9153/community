@@ -13,7 +13,7 @@
 - git clone https://github.com/1320546563/community.git  
 - yum install maven  
 - mvn clean compile package
-- cp  src/main/resources/application.properties  src/main/resources/application-production.properties  
+- cp src/main/resources/application.properties  src/main/resources/application-production.properties  
 - vim src/main/resources/application-production.properties  
 - mvn package  
 - java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar
